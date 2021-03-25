@@ -108,7 +108,7 @@ composer require api
 ##création  des composants pour chaque entité et configuration api_platform
 -[x] Effectué
 
-                                                                   ## COMMIT !!
+                                                                  ## COMMIT !!
 *************************************************
 
 #mise en place du Jwt Authentication
@@ -166,7 +166,7 @@ api_login_check:
 ###mise en place d'event pour securisé l'acces a certaine donnée par recuperation d"evenement :
 dossier CurrentUserSession
 -[x] Effectué
-                                                                  ## COMMIT !!
+ ## COMMIT !!
 *************************************************
 ###mise en place doctrine pour securisé l'acces a certaine donnée :
 dossier CurrentUserSession
