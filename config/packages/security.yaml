@@ -1,0 +1,77 @@
+security:
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        #rajout de la registration access au site
+        registration:
+            pattern: ^/api/users
+            anonymous: true
+            stateless: true
+            methods: [ POST ]
+        #rajout de la configuration lexik_jwt_authentication
+        login:
+            pattern: ^/api/login
+            stateless: true
+            anonymous: true
+            json_login:
+                check_path: /api/login_check
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        api:
+            pattern: ^/api
+            stateless: true
+            anonymous: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+        main:
+            anonymous: true
+            lazy: true
+            provider: app_user_provider
+
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
+
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
+
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
+    access_control:
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/day_checks, roles: ROLE_EDITOR }
+        - { path: ^/api/diets, roles: ROLE_MODERATOR }
+        - { path: ^/api/hearths, roles: ROLE_DIRECTOR }
+        - { path: ^/api/residents, roles: ROLE_USER }
+        - { path: ^/api/textures, roles: ROLE_MODERATOR }
+        - { path: ^/api/unities, roles: ROLE_DIRECTOR }
+        - {
+            path: ^/api/users,
+            roles: IS_AUTHENTICATED_FULLY,
+            methods: [ 'GET','PUT','DELETE' ] }
+
+        - { path: ^/admin, roles: ROLE_DIRECTOR }
+
+
+
+
+    # La partie role_hierarchy contient la hiérarchie des rôles
+    # Un éditeur sera également utilisateur
+    # Un administrateur sera également éditeur et donc utilisateur
+    role_hierarchy:
+        ROLE_EDITOR: ROLE_USER
+        ROLE_MODERATOR: ROLE_EDITOR
+        ROLE_DIRECTOR: ROLE_MODERATOR
+        ROLE_ADMIN: ROLE_DIRECTOR
