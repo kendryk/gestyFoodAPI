@@ -4,15 +4,13 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-class ResponseSubscriber implements EventSubscriberInterface
-{
+class ResponseSubscriber implements EventSubscriberInterface {
     public static function getSubscribedEvents()
     {
         return [
             KernelEvents::RESPONSE => 'onResponse'
         ];
     }
-
     public function onResponse(ResponseEvent $event)
     {
         // Fix to avoid problems with OPTIONS method
@@ -28,7 +26,7 @@ class ResponseSubscriber implements EventSubscriberInterface
                     'Content-Length' => 0
                 ])
             );
-            return;
+            return ;
         }
     }
 }

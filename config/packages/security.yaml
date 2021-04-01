@@ -51,18 +51,16 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/day_checks, roles: ROLE_EDITOR }
-        - { path: ^/api/diets, roles: ROLE_MODERATOR }
-        - { path: ^/api/hearths, roles: ROLE_DIRECTOR }
+        - { path: ^/api/hearths, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/day_checks, roles: ROLE_EDITOR  }
+        - { path: ^/api/diets, roles:  ROLE_MODERATOR}
         - { path: ^/api/residents, roles: ROLE_USER }
         - { path: ^/api/textures, roles: ROLE_MODERATOR }
-        - { path: ^/api/unities, roles: ROLE_DIRECTOR }
-        - {
-            path: ^/api/users,
-            roles: IS_AUTHENTICATED_FULLY,
-            methods: [ 'GET','PUT','DELETE' ] }
+        - { path: ^/api/unities, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/users,roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: ^/admin, roles: ROLE_DIRECTOR }
+
+        - { path: ^/admin, roles: ROLE_ADMIN  }
 
 
 

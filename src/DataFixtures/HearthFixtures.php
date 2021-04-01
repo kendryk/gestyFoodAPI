@@ -24,7 +24,6 @@ class HearthFixtures extends Fixture implements DependentFixtureInterface
             $hearth->setEmail('Mail'.$i);
             $hearth->setCreatedAt(new\DateTime("2021/04/2".$i));
             $hearth->setUpdateAt(new\DateTime("2021/04/2".$i));
-            $hearth->setCreatedBy($this->getReference('user-director-1'));
             $manager->persist( $hearth);
             $this->addReference("Foyer-".$i,$hearth);
         }

@@ -96,7 +96,7 @@ class Hearth
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="hearths")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @Groups({"hearths_read"})
      */
     private $createdBy;
