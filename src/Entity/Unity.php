@@ -39,7 +39,7 @@ class Unity
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      * @Groups({"unities_read"})
      */
     private $photo;

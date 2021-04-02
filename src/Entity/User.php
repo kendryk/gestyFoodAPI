@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ApiResource(
  *  normalizationContext={
  *      "groups"={"users_read"}
- * }
+ * },
  * )
  * @UniqueEntity("email", message="un utilisateur ayant cette adresse existe déjà")
  */
@@ -27,7 +27,7 @@ class User implements UserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"users_read"})
+     * @Groups({"users_read", "hearths_read"})
      */
     private $id;
 
@@ -114,10 +114,6 @@ class User implements UserInterface
      */
     private $diets;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Hearth::class, mappedBy="createdBy")
-     */
-    private $hearths;
 
     /**
      * @ORM\OneToMany(targetEntity=Resident::class, mappedBy="createdBy", orphanRemoval=true)
@@ -139,7 +135,6 @@ class User implements UserInterface
     {
         $this->dayChecks = new ArrayCollection();
         $this->diets = new ArrayCollection();
-        $this->hearths = new ArrayCollection();
         $this->residents = new ArrayCollection();
         $this->textures = new ArrayCollection();
         $this->unities = new ArrayCollection();
@@ -330,13 +325,6 @@ class User implements UserInterface
         return $this->diets;
     }
 
-    /**
-     * @return Collection|Hearth[]
-     */
-    public function getHearths(): Collection
-    {
-        return $this->hearths;
-    }
 
     /**
      * @return Collection|Resident[]

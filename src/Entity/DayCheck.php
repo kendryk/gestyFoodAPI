@@ -70,7 +70,6 @@ class DayCheck
     /**
      * @ORM\ManyToOne(targetEntity=Resident::class, inversedBy="dayChecks")
      * @ORM\JoinColumn(nullable=false)
-     * @Groups({"dayChecks_read"})
      */
     private $resident;
 
@@ -80,6 +79,9 @@ class DayCheck
      * @Groups({"dayChecks_read"})
      */
     private $createdBy;
+
+
+//    ************************************************************************
 
     public function getId(): ?int
     {

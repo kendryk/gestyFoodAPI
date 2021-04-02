@@ -34,7 +34,8 @@ class CurrentUserSession implements QueryCollectionExtensionInterface, QueryItem
         // 1.obtenir l'user connecté.
         $user = $this->security->getUser();
 
-        // si on demande des entités(hearth, user, unité, résident, diet, texture; dayCheck) agir sur la requete pour qu'elle tienne compte de l'utilisateur connecté et de hearth_id
+        // si on demande des entités(hearth, user, unité, résident, diet, texture; dayCheck)
+        // agir sur la requete pour qu'elle tienne compte de l'utilisateur connecté et de hearth_id
         // et si c'est un admin il peut tous voir et si il est connecté
         if(($resourceClass === Hearth::class ||
             $resourceClass === Unity::class ||

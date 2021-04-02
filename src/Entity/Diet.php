@@ -47,12 +47,11 @@ class Diet
      * @ORM\Column(type="datetime")
      * @Groups({"diets_read"})
      */
-    private $UpdateAt;
+    private $updateAt;
 
 
     /**
      * @ORM\ManyToMany(targetEntity=Resident::class, inversedBy="diets")
-     * @Groups({"diets_read"})
      */
     private $resident;
 
@@ -63,6 +62,7 @@ class Diet
      */
     private $createdBy;
 
+//*****************************************************************
     public function __construct()
     {
         $this->resident = new ArrayCollection();
@@ -99,12 +99,12 @@ class Diet
 
     public function getUpdateAt(): ?\DateTimeInterface
     {
-        return $this->UpdateAt;
+        return $this->updateAt;
     }
 
-    public function setUpdateAt(\DateTimeInterface $UpdateAt): self
+    public function setUpdateAt(\DateTimeInterface $updateAt): self
     {
-        $this->UpdateAt = $UpdateAt;
+        $this->updateAt = $updateAt;
 
         return $this;
     }

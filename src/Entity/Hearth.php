@@ -14,8 +14,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=HearthRepository::class)
  * @ApiResource(
  *  normalizationContext={
- *      "groups"={"hearths_read"}
- * }
+ *      "groups"={"hearths_read"}},
+ *  denormalizationContext={
+ *      "groups"={"hearths_create"}
+ *     }
+ *
  * )
  */
 class Hearth
@@ -24,13 +27,13 @@ class Hearth
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"hearths_read"})
+     * @Groups({"hearths_read", "hearths_create", "users_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=80)
-     * @Groups({"hearths_read", "users_read", "unities_read", "residents_read"})
+     * @Groups({"hearths_read", "users_read", "unities_read", "residents_read", "hearths_create"})
      * @Assert\NotBlank(message="Nom du foyer  obligatoire")
      * @Assert\Length(min=3, minMessage="Le Nom doit faire entre 3 et 255 caractères",
      *     max=255, maxMessage="Le Nom doit faire entre 3 et 255 caractères")
@@ -39,7 +42,7 @@ class Hearth
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"hearths_read","users_read", "unities_read"})
+     * @Groups({"hearths_read", "users_read", "unities_read", "hearths_create"})
      * @Assert\NotBlank(message="Adresse du foyer  obligatoire")
      * @Assert\Length(min=3, minMessage="L'Adresse doit faire entre 3 et 255 caractères",
      *     max=255, maxMessage="L'Adresse doit faire entre 3 et 255 caractères")
@@ -48,7 +51,7 @@ class Hearth
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"hearths_read","users_read", "unities_read"})
+     * @Groups({"hearths_read", "users_read", "unities_read", "hearths_create"})
      * @Assert\NotBlank(message="Nom de la ville  obligatoire")
      * @Assert\Length(min=3, minMessage="La ville doit faire entre 3 et 255 caractères",
      *     max=255, maxMessage="La ville doit faire entre 3 et 255 caractères")
@@ -57,13 +60,13 @@ class Hearth
 
     /**
      * @ORM\Column(type="bigint")
-     * @Groups({"hearths_read"})
+     * @Groups({"hearths_read", "users_read", "hearths_create"})
      */
     private $phone;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"hearths_read"})
+     * @Groups({"hearths_read", "users_read", "hearths_create"})
      * @Assert\NotBlank(message="Email obligatoire")
      * @Assert\Email(message="Le format de l'adresse email doit être valide")
      */
@@ -94,12 +97,7 @@ class Hearth
      */
     private $users;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="hearths")
-     * @ORM\JoinColumn(nullable=true)
-     * @Groups({"hearths_read"})
-     */
-    private $createdBy;
+
 
     public function __construct()
     {
@@ -258,17 +256,7 @@ class Hearth
         return $this;
     }
 
-    public function getCreatedBy(): ?User
-    {
-        return $this->createdBy;
-    }
 
-    public function setCreatedBy(?User $createdBy): self
-    {
-        $this->createdBy = $createdBy;
-
-        return $this;
-    }
 
 
 

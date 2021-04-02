@@ -52,7 +52,6 @@ class Texture
 
     /**
      * @ORM\ManyToMany(targetEntity=Resident::class, inversedBy="textures")
-     * @Groups({"textures_read"})
      */
     private $resident;
 
