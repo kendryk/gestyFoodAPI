@@ -76,7 +76,7 @@ class CurrentUserSession implements QueryCollectionExtensionInterface, QueryItem
 
 
             }elseif($resourceClass === Resident::class  ){
-                $queryBuilder->join("$rootAlias.unity", "uny")
+                $queryBuilder->join("$rootAlias.hearth", "uny")
                     ->andWhere("uny= :userHearth");
 
 
@@ -84,17 +84,17 @@ class CurrentUserSession implements QueryCollectionExtensionInterface, QueryItem
 
 
             }elseif($resourceClass === Diet::class  ){
-                $queryBuilder->join("$rootAlias.resident", "d")
+                $queryBuilder->join("$rootAlias.hearth", "d")
                     ->andWhere("d = :userHearth");
 
 
             }elseif($resourceClass === Texture::class ){
-                $queryBuilder->join("$rootAlias.resident", "t")
+                $queryBuilder->join("$rootAlias.hearth", "t")
                     ->andWhere("t = :userHearth");
 
 
             }elseif($resourceClass === DayCheck::class  ){
-                $queryBuilder->join("$rootAlias.resident", "dw")
+                $queryBuilder->join("$rootAlias.hearth", "dw")
                     ->andWhere("dw = :userHearth");
             }
 

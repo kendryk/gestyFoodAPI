@@ -97,12 +97,30 @@ class Hearth
      */
     private $users;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Resident::class, mappedBy="hearth", orphanRemoval=true)
+     */
+    private $residents;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Texture::class, mappedBy="hearth", orphanRemoval=true)
+     */
+    private $textures;
+
+    /**
+     * @ORM\OneToMany(targetEntity=DayCheck::class, mappedBy="hearth")
+     */
+    private $dayChecks;
+
 
 
     public function __construct()
     {
         $this->unities = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->residents = new ArrayCollection();
+        $this->textures = new ArrayCollection();
+        $this->dayChecks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -250,6 +268,96 @@ class Hearth
             // set the owning side to null (unless already changed)
             if ($user->getHearth() === $this) {
                 $user->setHearth(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Resident[]
+     */
+    public function getResidents(): Collection
+    {
+        return $this->residents;
+    }
+
+    public function addResident(Resident $resident): self
+    {
+        if (!$this->residents->contains($resident)) {
+            $this->residents[] = $resident;
+            $resident->setHearth($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResident(Resident $resident): self
+    {
+        if ($this->residents->removeElement($resident)) {
+            // set the owning side to null (unless already changed)
+            if ($resident->getHearth() === $this) {
+                $resident->setHearth(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Texture[]
+     */
+    public function getTextures(): Collection
+    {
+        return $this->textures;
+    }
+
+    public function addTexture(Texture $texture): self
+    {
+        if (!$this->textures->contains($texture)) {
+            $this->textures[] = $texture;
+            $texture->setHearth($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTexture(Texture $texture): self
+    {
+        if ($this->textures->removeElement($texture)) {
+            // set the owning side to null (unless already changed)
+            if ($texture->getHearth() === $this) {
+                $texture->setHearth(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DayCheck[]
+     */
+    public function getDayChecks(): Collection
+    {
+        return $this->dayChecks;
+    }
+
+    public function addDayCheck(DayCheck $dayCheck): self
+    {
+        if (!$this->dayChecks->contains($dayCheck)) {
+            $this->dayChecks[] = $dayCheck;
+            $dayCheck->setHearth($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDayCheck(DayCheck $dayCheck): self
+    {
+        if ($this->dayChecks->removeElement($dayCheck)) {
+            // set the owning side to null (unless already changed)
+            if ($dayCheck->getHearth() === $this) {
+                $dayCheck->setHearth(null);
             }
         }
 

@@ -62,6 +62,12 @@ class Texture
      */
     private $createdBy;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Hearth::class, inversedBy="textures")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $hearth;
+
     public function __construct()
     {
         $this->resident = new ArrayCollection();
@@ -141,6 +147,18 @@ class Texture
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getHearth(): ?Hearth
+    {
+        return $this->hearth;
+    }
+
+    public function setHearth(?Hearth $hearth): self
+    {
+        $this->hearth = $hearth;
 
         return $this;
     }

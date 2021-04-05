@@ -108,6 +108,12 @@ class Resident
      */
     private $createdBy;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Hearth::class, inversedBy="residents")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $hearth;
+
     public function __construct()
     {
         $this->diets = new ArrayCollection();
@@ -298,6 +304,18 @@ class Resident
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getHearth(): ?Hearth
+    {
+        return $this->hearth;
+    }
+
+    public function setHearth(?Hearth $hearth): self
+    {
+        $this->hearth = $hearth;
 
         return $this;
     }

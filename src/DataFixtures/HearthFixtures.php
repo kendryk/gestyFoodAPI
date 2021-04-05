@@ -7,7 +7,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class HearthFixtures extends Fixture implements DependentFixtureInterface
+class HearthFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
@@ -30,13 +30,7 @@ class HearthFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->flush();
     }
-    public function getDependencies()
-    {
-        return [
-            UserFixtures::class,
 
-        ];
-    }
 
 
 }

@@ -39,7 +39,7 @@ class UnityFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-            HearthFixtures::class,
+            UserFixtures::class
 
         ];
     }

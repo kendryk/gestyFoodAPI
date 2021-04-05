@@ -80,6 +80,12 @@ class DayCheck
      */
     private $createdBy;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Hearth::class, inversedBy="dayChecks")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $hearth;
+
 
 //    ************************************************************************
 
@@ -170,6 +176,18 @@ class DayCheck
     public function setCreatedBy(?User $createdBy): self
     {
         $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getHearth(): ?Hearth
+    {
+        return $this->hearth;
+    }
+
+    public function setHearth(?Hearth $hearth): self
+    {
+        $this->hearth = $hearth;
 
         return $this;
     }
