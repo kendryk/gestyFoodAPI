@@ -21,7 +21,14 @@ use Symfony\Component\Security\Core\Security;
 
 class CurrentUserSession implements QueryCollectionExtensionInterface, QueryItemExtensionInterface
 {
+    /**
+     * @var Security
+     */
     private $security;
+
+    /**
+     * @var AuthorizationCheckerInterface
+     */
     private $auth;
 
     public function __construct(Security $security, AuthorizationCheckerInterface $checker)
@@ -34,6 +41,7 @@ class CurrentUserSession implements QueryCollectionExtensionInterface, QueryItem
         // 1.obtenir l'user connecté.
         $user = $this->security->getUser();
 
+
         // si on demande des entités(hearth, user, unité, résident, diet, texture; dayCheck)
         // agir sur la requete pour qu'elle tienne compte de l'utilisateur connecté et de hearth_id
         // et si c'est un admin il peut tous voir et si il est connecté
@@ -43,41 +51,48 @@ class CurrentUserSession implements QueryCollectionExtensionInterface, QueryItem
             $resourceClass === Resident::class ||
             $resourceClass === Diet::class ||
             $resourceClass === Texture::class ||
-            $resourceClass === DayCheck::class ) &&
-            !$this->auth->isGranted('ROLE_ADMIN') &&
-            //TODO : ADMIN est ce qu il a le droit d'acceder a tous ?
+            $resourceClass === DayCheck::class )
+            &&
+            !$this->auth->isGranted('ROLE_ADMIN')
+            &&
             $user instanceof User
         ){
 
             $userHearth = $user->getHearth();
+
             $rootAlias = $queryBuilder->getRootAliases()[0];
+
 
             if($resourceClass === Hearth::class ){
                 $queryBuilder->andWhere("$rootAlias = :userHearth");
 
             }elseif($resourceClass === User::class ){
-                $queryBuilder->join("$rootAlias.hearth", "u")
-                    ->andWhere("u = :userHearth");
+                $queryBuilder->join("$rootAlias.hearth", "u");
+                $queryBuilder->andWhere("u = :userHearth");
 
             }elseif($resourceClass === Unity::class  ){
-                $queryBuilder->join("$rootAlias.hearth", "h")
-                    ->andWhere("h = :userHearth");
+                $queryBuilder->join("$rootAlias.hearth", "h");
+                $queryBuilder->andWhere("h = :userHearth");
+
 
             }elseif($resourceClass === Resident::class  ){
                 $queryBuilder->join("$rootAlias.unity", "uny")
-                    ->andWhere("uny = :userHearth");
+                    ->andWhere("uny= :userHearth");
 
-                //TODO : probleme de sécurité acces !
+
+
+
+
             }elseif($resourceClass === Diet::class  ){
                 $queryBuilder->join("$rootAlias.resident", "d")
                     ->andWhere("d = :userHearth");
 
-                //TODO : probleme de sécurité acces !
+
             }elseif($resourceClass === Texture::class ){
                 $queryBuilder->join("$rootAlias.resident", "t")
                     ->andWhere("t = :userHearth");
 
-                //TODO : probleme de sécurité acces !
+
             }elseif($resourceClass === DayCheck::class  ){
                 $queryBuilder->join("$rootAlias.resident", "dw")
                     ->andWhere("dw = :userHearth");
@@ -86,6 +101,7 @@ class CurrentUserSession implements QueryCollectionExtensionInterface, QueryItem
 
 
             $queryBuilder->setParameter("userHearth",$userHearth);
+
         }
 
     }

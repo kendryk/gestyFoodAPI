@@ -23,6 +23,9 @@ class JwtCreatedSubscriber
         $data['firstName']= $user->getFirstName();
         $data['lastName']= $user->getLastName();
 
+        $data['hearthId']= $user->getHearth()->getId();
+        $data['hearthName']= $user->getHearth()->getName();
+
         $event ->setData($data);
 
 

@@ -56,7 +56,7 @@ security:
         - { path: ^/api/diets, roles:  ROLE_MODERATOR}
         - { path: ^/api/residents, roles: ROLE_USER }
         - { path: ^/api/textures, roles: ROLE_MODERATOR }
-        - { path: ^/api/unities, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/unities, roles: ROLE_USER }
         - { path: ^/api/users,roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
 
