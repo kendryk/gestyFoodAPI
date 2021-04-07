@@ -39,7 +39,7 @@ class ResidentUserSubscriber implements EventSubscriberInterface
         $resident = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        if ($resident instanceof Resident && $method === "POST") {
+        if ($resident instanceof Resident && ($method === "PUT" || $method === "POST")) {
             $user = $this->security->getUser();
             $resident->setCreatedBy($user);
 

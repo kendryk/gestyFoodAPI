@@ -27,7 +27,7 @@ class HearthUserSubscriber implements EventSubscriberInterface{
         $hearth = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        if ($hearth instanceof Hearth && $method === "POST") {
+        if ($hearth instanceof Hearth && ($method === "PUT" || $method === "POST")) {
 
             if(empty($hearth->getCreatedAt())){
                 $hearth->setCreatedAt(new \DateTime());

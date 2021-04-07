@@ -41,7 +41,7 @@ class UnityUserSubscriber implements EventSubscriberInterface
         $unity = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        if ($unity instanceof Unity && $method === "POST") {
+        if ($unity instanceof Unity && ($method === "PUT" || $method === "POST")) {
             $user = $this->security->getUser();
             $unity->setCreatedBy($user);
 

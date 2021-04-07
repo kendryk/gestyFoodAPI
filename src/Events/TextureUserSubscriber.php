@@ -39,7 +39,7 @@ class TextureUserSubscriber implements EventSubscriberInterface
         $texture = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        if ($texture instanceof Texture && $method === "POST") {
+        if ($texture instanceof Texture && ($method === "PUT" || $method === "POST")) {
             $user = $this->security->getUser();
             $texture->setCreatedBy($user);
 

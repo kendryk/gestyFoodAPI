@@ -39,8 +39,8 @@ class DayCheck
      * @ORM\Column(type="string", length=80)
      * @Groups({"dayChecks_read", "residents_read"})
      * @Assert\NotBlank(message="Le choix doit etre renseigné")
-     * @Assert\Choice(choices={"matin/midi/soir", "matin/midi", "matin/soir", "midi/soir", "matin", "midi", "soir"},
-     *     message="Le choix doit etre matin/midi/soir, matin/midi, matin/soir, midi/soir, matin, midi, soir")
+     * @Assert\Choice(choices={"matin|midi|soir", "matin|midi", "matin|soir", "midi|soir", "matin", "midi", "soir"},
+     *     message="Le choix doit etre matin|midi|soir, matin|midi, matin|soir, midi|soir, matin, midi, soir")
      */
     private $checkTime;
 

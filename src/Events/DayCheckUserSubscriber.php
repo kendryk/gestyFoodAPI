@@ -39,7 +39,7 @@ class DayCheckUserSubscriber implements EventSubscriberInterface
         $dayCheck = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        if ($dayCheck instanceof DayCheck && $method === "POST") {
+        if ($dayCheck instanceof DayCheck && ($method === "PUT" || $method === "POST")) {
             $user = $this->security->getUser();
             $dayCheck->setCreatedBy($user);
 

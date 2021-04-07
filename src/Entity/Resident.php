@@ -85,12 +85,14 @@ class Resident
     /**
      * @ORM\ManyToMany(targetEntity=Diet::class, mappedBy="resident")
      * @Groups({"residents_read"})
+     * @ApiSubresource
      */
     private $diets;
 
     /**
      * @ORM\ManyToMany(targetEntity=Texture::class, mappedBy="resident")
      * @Groups({"residents_read"})
+     * @ApiSubresource
      */
     private $textures;
 

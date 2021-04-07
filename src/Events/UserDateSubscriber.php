@@ -24,7 +24,7 @@ class UserDateSubscriber implements EventSubscriberInterface
         $user = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        if ($user instanceof User && $method === "POST") {
+        if ($user instanceof User && ($method === "PUT" || $method === "POST")) {
 
             if(empty($user->getCreatedAt())){
                 $user->setCreatedAt(new \DateTime());

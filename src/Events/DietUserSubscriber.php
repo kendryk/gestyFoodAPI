@@ -39,7 +39,7 @@ class DietUserSubscriber implements EventSubscriberInterface
         $diet = $event->getControllerResult();
         $method = $event->getRequest()->getMethod();
 
-        if ($diet instanceof Diet && $method === "POST") {
+        if ($diet instanceof Diet && ($method === "PUT" || $method === "POST")) {
             $user = $this->security->getUser();
             $diet->setCreatedBy($user);
 
