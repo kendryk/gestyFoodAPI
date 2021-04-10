@@ -17,7 +17,7 @@ class DayCheckFixtures extends Fixture implements DependentFixtureInterface
         for($f=1; $f< 4; $f++){
             for($i=1; $i< 3; $i++) {
                 for ($j = 1; $j < 3; $j++) {
-
+                    $number =  random_int(1,9);
                     foreach ($daysWeek as $jour) {
                         $dayCheck = new DayCheck();
                         $dayCheck->setName($jour);
@@ -27,6 +27,8 @@ class DayCheckFixtures extends Fixture implements DependentFixtureInterface
                         $dayCheck->setUpdateAt(new\DateTime("2021/04/2".$i));
                         $dayCheck->setCreatedBy($this->getReference('user-director-1'));
                         $dayCheck->setHearth($this->getReference("Foyer-1"));
+                        $dayCheck->setDiet($this->getReference('Regime-'.$number));
+                        $dayCheck->setTexture($this->getReference('texture-'.$number));
                         $dayCheck->setWeek('Semaine-1');
                         $manager->persist($dayCheck);
                         $this->addReference($jour."/Resident-" . $j . "/Unit-" . $i . "/Foyer-" . $f, $dayCheck);
@@ -37,6 +39,7 @@ class DayCheckFixtures extends Fixture implements DependentFixtureInterface
                 }
             }
         }
+
     }
 
     public function getDependencies()

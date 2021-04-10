@@ -15,7 +15,7 @@ class ResidentFixtures extends Fixture implements DependentFixtureInterface
             for($i=1; $i< 3; $i++){
                 for($j=1; $j< 3; $j++){
 
-                    $number =  random_int(1,9);
+
                     $resident = new Resident();
                     $resident->setFirstName('nom'.$j );
                     $resident->setLastName('prénom'.$j );
@@ -26,8 +26,7 @@ class ResidentFixtures extends Fixture implements DependentFixtureInterface
                     $resident->setUnity($this->getReference("Unit-".$i."/Foyer-".$f));
                     $resident->setHearth($this->getReference("Foyer-".$f));
                     $resident->setCreatedBy($this->getReference('user-director-1'));
-                    $resident->addDiet($this->getReference('Regime-'.$number));
-                    $resident->addTexture($this->getReference('texture-'.$number));
+
 
                     $manager->persist($resident);
 

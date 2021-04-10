@@ -43,13 +43,13 @@ class DayCheck
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"dayChecks_read"})
+     * @Groups({"dayChecks_read", "residents_read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
-     * @Groups({"dayChecks_read"})
+     * @Groups({"dayChecks_read", "residents_read"})
      */
     private $updateAt;
 
@@ -57,7 +57,7 @@ class DayCheck
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"dayChecks_read"})
+     * @Groups({"dayChecks_read", "residents_read"})
      * @Assert\NotBlank(message="Le nom de de la semaine est obligatoire")
      * @Assert\Length(min=3, minMessage="Le nom doit faire entre 3 et 255 caractères",
      *      max=255, maxMessage="Le nom doit faire entre 3 et 255 caractères")
@@ -76,6 +76,21 @@ class DayCheck
      * @Groups({"dayChecks_read"})
      */
     private $createdBy;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Diet::class, inversedBy="dayChecks")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"dayChecks_read", "residents_read"})
+     */
+    private $diet;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Texture::class, inversedBy="dayChecks")
+     * @ORM\JoinColumn(nullable=false)
+     * @Groups({"dayChecks_read", "residents_read"})
+     */
+    private $texture;
+
 
     /**
      * @ORM\ManyToOne(targetEntity=Hearth::class, inversedBy="dayChecks")
@@ -176,6 +191,32 @@ class DayCheck
 
         return $this;
     }
+
+    public function getDiet(): ?Diet
+    {
+        return $this->diet;
+    }
+
+    public function setDiet(?Diet $diet): self
+    {
+        $this->diet = $diet;
+
+        return $this;
+    }
+
+    public function getTexture(): ?Texture
+    {
+        return $this->texture;
+    }
+
+    public function setTexture(?Texture $texture): self
+    {
+        $this->texture = $texture;
+
+        return $this;
+    }
+
+
 
     public function getHearth(): ?Hearth
     {

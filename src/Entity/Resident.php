@@ -82,19 +82,6 @@ class Resident
      */
     private $unity;
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Diet::class, mappedBy="resident")
-     * @Groups({"residents_read"})
-     * @ApiSubresource
-     */
-    private $diets;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Texture::class, mappedBy="resident")
-     * @Groups({"residents_read"})
-     * @ApiSubresource
-     */
-    private $textures;
 
     /**
      * @ORM\OneToMany(targetEntity=DayCheck::class, mappedBy="resident", orphanRemoval=true)
@@ -118,8 +105,6 @@ class Resident
 
     public function __construct()
     {
-        $this->diets = new ArrayCollection();
-        $this->textures = new ArrayCollection();
         $this->dayChecks = new ArrayCollection();
     }
 
@@ -214,59 +199,7 @@ class Resident
         return $this;
     }
 
-    /**
-     * @return Collection|Diet[]
-     */
-    public function getDiets(): Collection
-    {
-        return $this->diets;
-    }
 
-    public function addDiet(Diet $diet): self
-    {
-        if (!$this->diets->contains($diet)) {
-            $this->diets[] = $diet;
-            $diet->addResident($this);
-        }
-
-        return $this;
-    }
-
-    public function removeDiet(Diet $diet): self
-    {
-        if ($this->diets->removeElement($diet)) {
-            $diet->removeResident($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Texture[]
-     */
-    public function getTextures(): Collection
-    {
-        return $this->textures;
-    }
-
-    public function addTexture(Texture $texture): self
-    {
-        if (!$this->textures->contains($texture)) {
-            $this->textures[] = $texture;
-            $texture->addResident($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTexture(Texture $texture): self
-    {
-        if ($this->textures->removeElement($texture)) {
-            $texture->removeResident($this);
-        }
-
-        return $this;
-    }
 
     /**
      * @return Collection|DayCheck[]

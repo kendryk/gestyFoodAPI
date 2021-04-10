@@ -50,10 +50,6 @@ class Diet
     private $updateAt;
 
 
-    /**
-     * @ORM\ManyToMany(targetEntity=Resident::class, inversedBy="diets")
-     */
-    private $resident;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="diets")
@@ -68,10 +64,15 @@ class Diet
      */
     private $hearth;
 
+    /**
+     * @ORM\OneToMany(targetEntity=DayCheck::class, mappedBy="diet")
+     */
+    private $dayChecks;
+
 //*****************************************************************
     public function __construct()
     {
-        $this->resident = new ArrayCollection();
+        $this->dayChecks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -117,29 +118,7 @@ class Diet
 
 
 
-    /**
-     * @return Collection|Resident[]
-     */
-    public function getResident(): Collection
-    {
-        return $this->resident;
-    }
 
-    public function addResident(Resident $resident): self
-    {
-        if (!$this->resident->contains($resident)) {
-            $this->resident[] = $resident;
-        }
-
-        return $this;
-    }
-
-    public function removeResident(Resident $resident): self
-    {
-        $this->resident->removeElement($resident);
-
-        return $this;
-    }
 
     public function getCreatedBy(): ?User
     {
@@ -161,6 +140,36 @@ class Diet
     public function setHearth(?Hearth $hearth): self
     {
         $this->hearth = $hearth;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|DayCheck[]
+     */
+    public function getDayChecks(): Collection
+    {
+        return $this->dayChecks;
+    }
+
+    public function addDayCheck(DayCheck $dayCheck): self
+    {
+        if (!$this->dayChecks->contains($dayCheck)) {
+            $this->dayChecks[] = $dayCheck;
+            $dayCheck->setDiet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDayCheck(DayCheck $dayCheck): self
+    {
+        if ($this->dayChecks->removeElement($dayCheck)) {
+            // set the owning side to null (unless already changed)
+            if ($dayCheck->getDiet() === $this) {
+                $dayCheck->setDiet(null);
+            }
+        }
 
         return $this;
     }

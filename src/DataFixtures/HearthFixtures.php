@@ -28,6 +28,20 @@ class HearthFixtures extends Fixture
             $this->addReference("Foyer-".$i,$hearth);
         }
 
+            $hearth999 = new Hearth();
+            $hearth999->setName('Foyer-999');
+            $hearth999->setAddress('rue 999');
+            $hearth999->setCity('Ville 999');
+            $hearth999->setPhone( 999);
+            $hearth999->setEmail('Mail 999');
+            $hearth999->setCreatedAt(new\DateTime("2021/04/21"));
+            $hearth999->setUpdateAt(new\DateTime("2021/04/21"));
+            $manager->persist( $hearth999);
+            $this->addReference("Foyer-999",$hearth999);
+
+
+
+
         $manager->flush();
     }
 

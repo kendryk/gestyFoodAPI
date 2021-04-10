@@ -51,9 +51,9 @@ class Texture
 
 
     /**
-     * @ORM\ManyToMany(targetEntity=Resident::class, inversedBy="textures")
+     * @ORM\OneToMany(targetEntity=DayCheck::class, mappedBy="texture")
      */
-    private $resident;
+    private $dayChecks;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="textures")
@@ -70,7 +70,7 @@ class Texture
 
     public function __construct()
     {
-        $this->resident = new ArrayCollection();
+        $this->dayChecks = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,25 +116,31 @@ class Texture
 
 
     /**
-     * @return Collection|Resident[]
+     * @return Collection|DayCheck[]
      */
-    public function getResident(): Collection
+    public function getDayChecks(): Collection
     {
-        return $this->resident;
+        return $this->dayChecks;
     }
 
-    public function addResident(Resident $resident): self
+    public function addDayCheck(DayCheck $dayCheck): self
     {
-        if (!$this->resident->contains($resident)) {
-            $this->resident[] = $resident;
+        if (!$this->dayChecks->contains($dayCheck)) {
+            $this->dayChecks[] = $dayCheck;
+            $dayCheck->setTexture($this);
         }
 
         return $this;
     }
 
-    public function removeResident(Resident $resident): self
+    public function removeDayCheck(DayCheck $dayCheck): self
     {
-        $this->resident->removeElement($resident);
+        if ($this->dayChecks->removeElement($dayCheck)) {
+            // set the owning side to null (unless already changed)
+            if ($dayCheck->getTexture() === $this) {
+                $dayCheck->setTexture(null);
+            }
+        }
 
         return $this;
     }

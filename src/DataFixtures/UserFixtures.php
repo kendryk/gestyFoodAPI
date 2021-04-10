@@ -33,7 +33,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $admin->setWork("admin");
         $admin->setCreatedAt(new\DateTime("2021/04/22"));
         $admin->setUpdateAt(new\DateTime("2021/04/22"));
-        $admin->setHearth($this->getReference("Foyer-1"));
+        $admin->setHearth($this->getReference("Foyer-999"));
         $admin->setRoles(["ROLE_ADMIN"]);
         $password = $this->encoder->encodePassword($admin,"admin");
         $admin->setPassword($password);
@@ -75,7 +75,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $moderateur->setWork("moderateur");
         $moderateur->setCreatedAt(new\DateTime("2021/04/22"));
         $moderateur->setUpdateAt(new\DateTime("2021/04/22"));
-        $admin->setHearth($this->getReference("Foyer-1"));
+        $moderateur->setHearth($this->getReference("Foyer-1"));
         $moderateur->setRoles(["ROLE_MODERATOR"]);
         $password = $this->encoder->encodePassword($moderateur,"root");
         $moderateur->setPassword($password);
