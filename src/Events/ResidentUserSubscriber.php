@@ -45,7 +45,6 @@ class ResidentUserSubscriber implements EventSubscriberInterface
 
             if(empty($resident->getCreatedAt())){
                 $resident->setCreatedAt(new \DateTime());
-                $resident->setUpdateAt(new \DateTime());
             }
             else{
                 $resident->setUpdateAt(new \DateTime());

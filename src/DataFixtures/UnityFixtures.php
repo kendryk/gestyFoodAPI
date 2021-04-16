@@ -20,7 +20,6 @@ class UnityFixtures extends Fixture implements DependentFixtureInterface
                 $unit->setName('Unit-'.$j);
                 $unit->setPhoto('PhotoUnit'.$j.'.jpg');
                 $unit->setCreatedAt(new\DateTime("2021/04/2".$j));
-                $unit->setUpdateAt(new\DateTime("2021/04/2".$j));
                 $unit->setHearth($this->getReference("Foyer-".$i));
                 $unit->setCreatedBy($this->getReference('user-director-1'));
                 $manager->persist( $unit);

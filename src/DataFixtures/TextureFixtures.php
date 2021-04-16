@@ -18,7 +18,6 @@ class TextureFixtures extends Fixture implements DependentFixtureInterface
                 $texture = new Texture();
                 $texture->setName("texture-".$i);
                 $texture->setCreatedAt(new\DateTime("2021/04/2".$i));
-                $texture->setUpdateAt(new\DateTime("2021/04/2".$i));
                 $texture->setCreatedBy($this->getReference('user-director-1'));
                 $texture->setHearth($this->getReference("Foyer-1"));
                 $this->addReference("texture-".$i, $texture);

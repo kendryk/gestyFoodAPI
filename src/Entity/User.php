@@ -92,7 +92,7 @@ class User implements UserInterface
     private $created_at;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"users_read"})
      */
     private $updateAt;

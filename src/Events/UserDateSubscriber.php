@@ -28,7 +28,6 @@ class UserDateSubscriber implements EventSubscriberInterface
 
             if(empty($user->getCreatedAt())){
                 $user->setCreatedAt(new \DateTime());
-                $user->setUpdateAt(new \DateTime());
             }
             else{
                 $user->setUpdateAt(new \DateTime());

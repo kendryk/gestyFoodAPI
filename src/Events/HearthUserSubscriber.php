@@ -31,7 +31,6 @@ class HearthUserSubscriber implements EventSubscriberInterface{
 
             if(empty($hearth->getCreatedAt())){
                 $hearth->setCreatedAt(new \DateTime());
-                $hearth->setUpdateAt(new \DateTime());
             }
             else{
                 $hearth->setUpdateAt(new \DateTime());

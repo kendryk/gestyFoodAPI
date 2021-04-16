@@ -55,7 +55,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $director->setLastName("director-".$i);
             $director->setWork("director-".$i);
             $director->setCreatedAt(new\DateTime("2021/04/22"));
-            $director->setUpdateAt(new\DateTime("2021/04/22"));
             $director->setHearth($this->getReference("Foyer-".$i));
             $director->setRoles(["ROLE_DIRECTOR"]);
             $password = $this->encoder->encodePassword($director, "director-".$i);
@@ -74,7 +73,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $moderateur->setLastName("moderateur");
         $moderateur->setWork("moderateur");
         $moderateur->setCreatedAt(new\DateTime("2021/04/22"));
-        $moderateur->setUpdateAt(new\DateTime("2021/04/22"));
         $moderateur->setHearth($this->getReference("Foyer-1"));
         $moderateur->setRoles(["ROLE_MODERATOR"]);
         $password = $this->encoder->encodePassword($moderateur,"root");
@@ -91,7 +89,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $editor->setLastName("editor");
         $editor->setWork("editor");
         $editor->setCreatedAt(new\DateTime("2021/04/22"));
-        $editor->setUpdateAt(new\DateTime("2021/04/22"));
         $editor->setHearth($this->getReference("Foyer-1"));
         $editor->setRoles(["ROLE_EDITOR"]);
         $password = $this->encoder->encodePassword($editor,"root");
@@ -109,7 +106,6 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $user->setLastName("user");
         $user->setWork("user");
         $user->setCreatedAt(new\DateTime("2021/04/22"));
-        $user->setUpdateAt(new\DateTime("2021/04/22"));
         $user->setHearth($this->getReference("Foyer-1"));
         $user->setRoles(["ROLE_USER"]);
         $password = $this->encoder->encodePassword($user,"root");

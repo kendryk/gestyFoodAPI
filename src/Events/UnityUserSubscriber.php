@@ -20,7 +20,7 @@ class UnityUserSubscriber implements EventSubscriberInterface
     private $repository;
 
 // Demande via le constructeur l injection de dépendance auprès de  symfony
-//  demande un instance de la classe security et du repository
+//  demande une instance de la classe security et du repository
 
     public function __construct(Security $security, UnityRepository $repository){
         // ce qui permet de recupérer ces instances que symfony nous passe
@@ -30,7 +30,6 @@ class UnityUserSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents(): array
     {
-        // TODO: Implement getSubscribedEvents() method.
         return [
             KernelEvents::VIEW => ['setUserForUnity', EventPriorities::PRE_VALIDATE]
         ];
@@ -47,7 +46,6 @@ class UnityUserSubscriber implements EventSubscriberInterface
 
             if(empty($unity->getCreatedAt())){
                 $unity->setCreatedAt(new \DateTime());
-                $unity->setUpdateAt(new \DateTime());
             }
             else{
                 $unity->setUpdateAt(new \DateTime());

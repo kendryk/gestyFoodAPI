@@ -23,7 +23,6 @@ class HearthFixtures extends Fixture
             $hearth->setPhone($i.$i.$i.$i );
             $hearth->setEmail('Mail'.$i);
             $hearth->setCreatedAt(new\DateTime("2021/04/2".$i));
-            $hearth->setUpdateAt(new\DateTime("2021/04/2".$i));
             $manager->persist( $hearth);
             $this->addReference("Foyer-".$i,$hearth);
         }
@@ -35,7 +34,6 @@ class HearthFixtures extends Fixture
             $hearth999->setPhone( 999);
             $hearth999->setEmail('Mail 999');
             $hearth999->setCreatedAt(new\DateTime("2021/04/21"));
-            $hearth999->setUpdateAt(new\DateTime("2021/04/21"));
             $manager->persist( $hearth999);
             $this->addReference("Foyer-999",$hearth999);
 

@@ -45,7 +45,6 @@ class DayCheckUserSubscriber implements EventSubscriberInterface
 
             if(empty($dayCheck->getCreatedAt())){
                 $dayCheck->setCreatedAt(new \DateTime());
-                $dayCheck->setUpdateAt(new \DateTime());
             }
             else{
                 $dayCheck->setUpdateAt(new \DateTime());

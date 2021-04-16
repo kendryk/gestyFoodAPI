@@ -16,7 +16,6 @@ class DietFixtures extends Fixture implements DependentFixtureInterface
             $diet = new Diet();
             $diet->setName("Regime-".$i);
             $diet->setCreatedAt(new\DateTime("2021/04/2".$i));
-            $diet->setUpdateAt(new\DateTime("2021/04/2".$i));
             $diet->setCreatedBy($this->getReference('user-director-1'));
             $diet->setHearth($this->getReference("Foyer-1"));
             $this->addReference("Regime-".$i, $diet);

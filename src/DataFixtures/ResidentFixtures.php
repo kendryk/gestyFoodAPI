@@ -22,7 +22,6 @@ class ResidentFixtures extends Fixture implements DependentFixtureInterface
                     $resident->setRoom('chambre'.$j );
                     $resident->setBornAt(new\DateTime("1965/04/2".$j ));
                     $resident->setCreatedAt(new\DateTime("2021/04/2".$j ));
-                    $resident->setUpdateAt(new\DateTime("2021/04/2".$j ));
                     $resident->setUnity($this->getReference("Unit-".$i."/Foyer-".$f));
                     $resident->setHearth($this->getReference("Foyer-".$f));
                     $resident->setCreatedBy($this->getReference('user-director-1'));

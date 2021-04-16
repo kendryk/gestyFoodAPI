@@ -45,7 +45,6 @@ class TextureUserSubscriber implements EventSubscriberInterface
 
             if(empty($texture->getCreatedAt())){
                 $texture->setCreatedAt(new \DateTime());
-                $texture->setUpdateAt(new \DateTime());
             }
             else{
                 $texture->setUpdateAt(new \DateTime());

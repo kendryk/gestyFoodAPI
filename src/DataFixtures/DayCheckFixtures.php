@@ -24,12 +24,11 @@ class DayCheckFixtures extends Fixture implements DependentFixtureInterface
                         $dayCheck->setChecktime('matin|midi|soir');
                         $dayCheck->setResident($this->getReference("Resident-" . $j . "/Unit-" . $i . "/Foyer-" . $f));
                         $dayCheck->setCreatedAt(new\DateTime("2021/04/2".$i));
-                        $dayCheck->setUpdateAt(new\DateTime("2021/04/2".$i));
                         $dayCheck->setCreatedBy($this->getReference('user-director-1'));
                         $dayCheck->setHearth($this->getReference("Foyer-1"));
                         $dayCheck->setDiet($this->getReference('Regime-'.$number));
                         $dayCheck->setTexture($this->getReference('texture-'.$number));
-                        $dayCheck->setWeek('Semaine-1');
+                        $dayCheck->setWeek(1);
                         $manager->persist($dayCheck);
                         $this->addReference($jour."/Resident-" . $j . "/Unit-" . $i . "/Foyer-" . $f, $dayCheck);
 

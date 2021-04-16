@@ -68,7 +68,7 @@ class Resident
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"residents_read"})
      */
     private $updateAt;

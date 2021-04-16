@@ -44,7 +44,7 @@ class Texture
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"textures_read"})
      */
     private $updateAt;

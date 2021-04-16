@@ -45,7 +45,6 @@ class DietUserSubscriber implements EventSubscriberInterface
 
             if(empty($diet->getCreatedAt())){
                 $diet->setCreatedAt(new \DateTime());
-                $diet->setUpdateAt(new \DateTime());
             }
             else{
                 $diet->setUpdateAt(new \DateTime());

@@ -59,7 +59,7 @@ class Hearth
     private $city;
 
     /**
-     * @ORM\Column(type="bigint")
+     * @ORM\Column(type="bigint", nullable=true)
      * @Groups({"hearths_read", "users_read", "hearths_create"})
      */
     private $phone;
@@ -79,7 +79,7 @@ class Hearth
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"hearths_read"})
      */
     private $updateAt;

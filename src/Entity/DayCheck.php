@@ -48,7 +48,7 @@ class DayCheck
     private $createdAt;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @Groups({"dayChecks_read", "residents_read"})
      */
     private $updateAt;
@@ -56,11 +56,9 @@ class DayCheck
 
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer", length=255)
      * @Groups({"dayChecks_read", "residents_read"})
      * @Assert\NotBlank(message="Le nom de de la semaine est obligatoire")
-     * @Assert\Length(min=3, minMessage="Le nom doit faire entre 3 et 255 caractères",
-     *      max=255, maxMessage="Le nom doit faire entre 3 et 255 caractères")
      */
     private $week;
 
@@ -79,14 +77,14 @@ class DayCheck
 
     /**
      * @ORM\ManyToOne(targetEntity=Diet::class, inversedBy="dayChecks")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @Groups({"dayChecks_read", "residents_read"})
      */
     private $diet;
 
     /**
      * @ORM\ManyToOne(targetEntity=Texture::class, inversedBy="dayChecks")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @Groups({"dayChecks_read", "residents_read"})
      */
     private $texture;
