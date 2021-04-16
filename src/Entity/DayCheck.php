@@ -22,7 +22,7 @@ class DayCheck
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"dayChecks_read"})
+     * @Groups({"dayChecks_read", "residents_read"})
      */
     private $id;
 
