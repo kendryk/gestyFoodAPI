@@ -5,6 +5,8 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
 use App\Repository\DayCheckRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -30,17 +32,10 @@ class DayCheck
     /**
      * @ORM\Column(type="string", length=80)
      * @Groups({"dayChecks_read", "residents_read"})
-     * @Assert\NotBlank(message="Le nom de de la journée est obligatoire")
-     * @Assert\Length(min=3, minMessage="Le nom doit faire entre 3 et 255 caractères",
-     *      max=255, maxMessage="Le nom doit faire entre 3 et 255 caractères")
      */
     private $name;
 
-    /**
-     * @ORM\Column(type="string", length=80)
-     * @Groups({"dayChecks_read", "residents_read"})
-     */
-    private $checkTime;
+
 
     /**
      * @ORM\Column(type="datetime")
@@ -56,12 +51,7 @@ class DayCheck
 
 
 
-    /**
-     * @ORM\Column(type="integer", length=255)
-     * @Groups({"dayChecks_read", "residents_read"})
-     * @Assert\NotBlank(message="Le nom de de la semaine est obligatoire")
-     */
-    private $week;
+
 
     /**
      * @ORM\ManyToOne(targetEntity=Resident::class, inversedBy="dayChecks")
@@ -97,6 +87,16 @@ class DayCheck
      */
     private $hearth;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Day::class, mappedBy="dayCheck", orphanRemoval=true)
+     */
+    private $days;
+
+    public function __construct()
+    {
+        $this->days = new ArrayCollection();
+    }
+
 
 //    ************************************************************************
 
@@ -117,17 +117,7 @@ class DayCheck
         return $this;
     }
 
-    public function getCheckTime(): ?string
-    {
-        return $this->checkTime;
-    }
 
-    public function setCheckTime(string $checkTime): self
-    {
-        $this->checkTime = $checkTime;
-
-        return $this;
-    }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -155,17 +145,7 @@ class DayCheck
 
 
 
-    public function getWeek(): ?string
-    {
-        return $this->week;
-    }
 
-    public function setWeek(string $week): self
-    {
-        $this->week = $week;
-
-        return $this;
-    }
 
     public function getResident(): ?Resident
     {
@@ -225,6 +205,36 @@ class DayCheck
     public function setHearth(?Hearth $hearth): self
     {
         $this->hearth = $hearth;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Day[]
+     */
+    public function getDays(): Collection
+    {
+        return $this->days;
+    }
+
+    public function addDay(Day $day): self
+    {
+        if (!$this->days->contains($day)) {
+            $this->days[] = $day;
+            $day->setDayCheck($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDay(Day $day): self
+    {
+        if ($this->days->removeElement($day)) {
+            // set the owning side to null (unless already changed)
+            if ($day->getDayCheck() === $this) {
+                $day->setDayCheck(null);
+            }
+        }
 
         return $this;
     }

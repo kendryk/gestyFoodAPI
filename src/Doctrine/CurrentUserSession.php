@@ -7,6 +7,7 @@ namespace App\Doctrine;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryCollectionExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
+use App\Entity\Day;
 use App\Entity\DayCheck;
 use App\Entity\Diet;
 use App\Entity\Hearth;
@@ -94,6 +95,10 @@ class CurrentUserSession implements QueryCollectionExtensionInterface, QueryItem
 
 
             }elseif($resourceClass === DayCheck::class  ){
+                $queryBuilder->join("$rootAlias.hearth", "dw")
+                    ->andWhere("dw = :userHearth");
+
+            }elseif($resourceClass === Day::class  ){
                 $queryBuilder->join("$rootAlias.hearth", "dw")
                     ->andWhere("dw = :userHearth");
             }

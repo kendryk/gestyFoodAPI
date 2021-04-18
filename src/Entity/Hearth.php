@@ -112,6 +112,11 @@ class Hearth
      */
     private $dayChecks;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Day::class, mappedBy="hearth", orphanRemoval=true)
+     */
+    private $days;
+
 
 
     public function __construct()
@@ -121,6 +126,7 @@ class Hearth
         $this->residents = new ArrayCollection();
         $this->textures = new ArrayCollection();
         $this->dayChecks = new ArrayCollection();
+        $this->days = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -358,6 +364,36 @@ class Hearth
             // set the owning side to null (unless already changed)
             if ($dayCheck->getHearth() === $this) {
                 $dayCheck->setHearth(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Day[]
+     */
+    public function getDays(): Collection
+    {
+        return $this->days;
+    }
+
+    public function addDay(Day $day): self
+    {
+        if (!$this->days->contains($day)) {
+            $this->days[] = $day;
+            $day->setHearth($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDay(Day $day): self
+    {
+        if ($this->days->removeElement($day)) {
+            // set the owning side to null (unless already changed)
+            if ($day->getHearth() === $this) {
+                $day->setHearth(null);
             }
         }
 

@@ -18,14 +18,16 @@ php bin/console lexik:jwt:generate-keypair
 symfony serve
 ```
 
-## Installation et compilation des assets :
+## Installation  des assets :
 ```shell script
 npm install
-npm run watch
 ```
-****************************************************************
-****************************************************************
-****************************************************************
+
+*****************************************************************************************
+
+*****************************************************************************************
+#Lorsque vous voulez vous lancer dans un nouveau projet :
+*****************************************************************************************
 ## Création du projet GestyFood
 -[X] Effectué
 ```shell script
