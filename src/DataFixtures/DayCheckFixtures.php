@@ -23,7 +23,7 @@ class DayCheckFixtures extends Fixture implements DependentFixtureInterface
                         $dayCheck->setName($jour);
                         $dayCheck->setChecktime('matin|midi|soir');
                         $dayCheck->setResident($this->getReference("Resident-" . $j . "/Unit-" . $i . "/Foyer-" . $f));
-                        $dayCheck->setCreatedAt(new\DateTime("2021/04/2".$i));
+                        $dayCheck->setCreatedAt(new\DateTime("2021/01/0".$i));
                         $dayCheck->setCreatedBy($this->getReference('user-director-1'));
                         $dayCheck->setHearth($this->getReference("Foyer-1"));
                         $dayCheck->setDiet($this->getReference('Regime-'.$number));
