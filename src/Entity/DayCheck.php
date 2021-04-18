@@ -35,8 +35,6 @@ class DayCheck
      */
     private $name;
 
-
-
     /**
      * @ORM\Column(type="datetime")
      * @Groups({"dayChecks_read", "residents_read"})
@@ -48,9 +46,6 @@ class DayCheck
      * @Groups({"dayChecks_read", "residents_read"})
      */
     private $updateAt;
-
-
-
 
 
     /**
@@ -89,6 +84,8 @@ class DayCheck
 
     /**
      * @ORM\OneToMany(targetEntity=Day::class, mappedBy="dayCheck", orphanRemoval=true)
+     * @Groups({"dayChecks_read"})
+     * @ApiSubresource
      */
     private $days;
 

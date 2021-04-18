@@ -56,8 +56,6 @@ class Unity
      */
     private $UpdateAt;
 
-
-
     /**
      * @ORM\OneToMany(targetEntity=Resident::class, mappedBy="unity", orphanRemoval=true)
      * @Groups({"unities_read"})

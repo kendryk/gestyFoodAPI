@@ -52,7 +52,9 @@ class CurrentUserSession implements QueryCollectionExtensionInterface, QueryItem
             $resourceClass === Resident::class ||
             $resourceClass === Diet::class ||
             $resourceClass === Texture::class ||
-            $resourceClass === DayCheck::class )
+            $resourceClass === DayCheck::class ||
+            $resourceClass === Day::class
+            )
             &&
             !$this->auth->isGranted('ROLE_ADMIN')
             &&
@@ -99,8 +101,8 @@ class CurrentUserSession implements QueryCollectionExtensionInterface, QueryItem
                     ->andWhere("dw = :userHearth");
 
             }elseif($resourceClass === Day::class  ){
-                $queryBuilder->join("$rootAlias.hearth", "dw")
-                    ->andWhere("dw = :userHearth");
+                $queryBuilder->join("$rootAlias.hearth", "d")
+                    ->andWhere("d = :userHearth");
             }
 
 
