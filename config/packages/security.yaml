@@ -52,10 +52,10 @@ security:
     access_control:
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/hearths, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/day_checks, roles: ROLE_EDITOR  }
-        - { path: ^/api/diets, roles:  ROLE_EDITOR}
+        - { path: ^/api/day_checks, roles: ROLE_USER  }
+        - { path: ^/api/diets, roles:  ROLE_USER}
         - { path: ^/api/residents, roles: ROLE_USER }
-        - { path: ^/api/textures, roles: ROLE_EDITOR }
+        - { path: ^/api/textures, roles: ROLE_USER }
         - { path: ^/api/unities, roles: ROLE_USER }
         - { path: ^/api/users,roles: IS_AUTHENTICATED_ANONYMOUSLY }
 

@@ -14,9 +14,16 @@ php bin/console doctrine:database:drop --force
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
+
+###si vous n'avez pas SSl installer le d'abord
 php bin/console lexik:jwt:generate-keypair
 symfony serve
-```
+
+###si cela ne fonctionne pas :
+symfony server:ca:install
+###pour le certificat
+###le plugin chrome pour les erreurs localhost
+Moesif CORS
 
 ## Installation  des assets :
 ```shell script

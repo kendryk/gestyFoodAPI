@@ -28,7 +28,6 @@ class ResidentUserSubscriber implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        // TODO: Implement getSubscribedEvents() method.
         return [
             KernelEvents::VIEW => ['setUserForResident', EventPriorities::PRE_VALIDATE]
         ];
