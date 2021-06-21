@@ -176,7 +176,3 @@ api_login_check:
 dossier CurrentUserSession
 -[x] Effectué 
 ##                                                                                      COMMIT !!
-*************************************************
-### mise en place doctrine pour securisé l'acces a certaine donnée :
-dossier CurrentUserSession
--[x] Effectué

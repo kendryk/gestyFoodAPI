@@ -62,7 +62,7 @@ class Hearth
      * @ORM\Column(type="bigint", nullable=true)
      * @Groups({"hearths_read", "users_read", "hearths_create"})
      */
-    private $phone;
+    private $phoneHearth;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -70,7 +70,7 @@ class Hearth
      * @Assert\NotBlank(message="Email obligatoire")
      * @Assert\Email(message="Le format de l'adresse email doit être valide")
      */
-    private $email;
+    private $emailHearth;
 
     /**
      * @ORM\Column(type="datetime")
@@ -170,26 +170,26 @@ class Hearth
         return $this;
     }
 
-    public function getPhone(): ?string
+    public function getPhoneHearth(): ?string
     {
-        return $this->phone;
+        return $this->phoneHearth;
     }
 
-    public function setPhone(string $phone): self
+    public function setPhoneHearth(string $phoneHearth): self
     {
-        $this->phone = $phone;
+        $this->phoneHearth = $phoneHearth;
 
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getEmailHearth(): ?string
     {
-        return $this->email;
+        return $this->emailHearth;
     }
 
-    public function setEmail(string $email): self
+    public function setEmailHearth(string $emailHearth): self
     {
-        $this->email = $email;
+        $this->emailHearth = $emailHearth;
 
         return $this;
     }

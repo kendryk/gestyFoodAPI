@@ -19,6 +19,19 @@ class ResidentRepository extends ServiceEntityRepository
         parent::__construct($registry, Resident::class);
     }
 
+
+    public function findResident()
+    {
+        return $this->createQueryBuilder('r')
+            ->addSelect('unity.name, unity.hearthId, user.firstName as userid')
+            ->innerJoin('r.unity', 'unity') // if you have define relation in your entity, you can just inner join it.
+            ->innerJoin('r.user', 'user')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+
+
     // /**
     //  * @return Resident[] Returns an array of Resident objects
     //  */

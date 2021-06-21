@@ -28,7 +28,7 @@ class PasswordEncoderSubscriber implements EventSubscriberInterface{
             KernelEvents::VIEW => ['encodePassword', EventPriorities::PRE_WRITE]
         ];
     }
-
+        //fonction permettant d'hasher le password en utilisant l'encoder appelé plus haut
     public function encodePassword(ViewEvent $event)
     {
         $result = $event->getControllerResult();
@@ -37,8 +37,12 @@ class PasswordEncoderSubscriber implements EventSubscriberInterface{
 
         // verifie si l'user  et la methode alors on encode le password
         if ($result instanceof User && $method === "POST"){
-
             $hash = $this->encoder->encodePassword($result,$result->getPassword());
+            $result->setPassword($hash);
+        }
+        // hashage du mot de passe lors de la modification de l'user
+        if ($result instanceof User && $method === "PUT") {
+            $hash = $this->encoder->encodePassword($result, $result->getPassword());
             $result->setPassword($hash);
         }
 

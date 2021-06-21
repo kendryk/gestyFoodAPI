@@ -20,8 +20,8 @@ class HearthFixtures extends Fixture
             $hearth->setName('Foyer-'.$i);
             $hearth->setAddress('rue'.$i);
             $hearth->setCity('Ville'.$i);
-            $hearth->setPhone($i.$i.$i.$i );
-            $hearth->setEmail('Mail'.$i);
+            $hearth->setPhoneHearth($i.$i.$i.$i );
+            $hearth->setEmailHearth('Mail'.$i);
             $hearth->setCreatedAt(new\DateTime("2021/04/2".$i));
             $manager->persist( $hearth);
             $this->addReference("Foyer-".$i,$hearth);
@@ -31,8 +31,8 @@ class HearthFixtures extends Fixture
             $hearth999->setName('Foyer-999');
             $hearth999->setAddress('rue 999');
             $hearth999->setCity('Ville 999');
-            $hearth999->setPhone( 999);
-            $hearth999->setEmail('Mail 999');
+            $hearth999->setPhoneHearth( 999);
+            $hearth999->setEmailHearth('Mail 999');
             $hearth999->setCreatedAt(new\DateTime("2021/04/21"));
             $manager->persist( $hearth999);
             $this->addReference("Foyer-999",$hearth999);

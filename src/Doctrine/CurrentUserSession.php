@@ -15,6 +15,7 @@ use App\Entity\Resident;
 use App\Entity\Texture;
 use App\Entity\Unity;
 use App\Entity\User;
+use App\Repository\ResidentRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Security;
@@ -84,8 +85,6 @@ class CurrentUserSession implements QueryCollectionExtensionInterface, QueryItem
 
 
 
-
-
             }elseif($resourceClass === Diet::class  ){
                 $queryBuilder->join("$rootAlias.hearth", "d")
                     ->andWhere("d = :userHearth");
@@ -124,12 +123,15 @@ class CurrentUserSession implements QueryCollectionExtensionInterface, QueryItem
     }
 
 
-
-
     public function applyToItem(QueryBuilder $queryBuilder, QueryNameGeneratorInterface $queryNameGenerator,
                                 string $resourceClass, array $identifiers, string $operationName = null, array $context = []){
 
         $this->addWhere( $queryBuilder,  $resourceClass);
 
     }
+
+    public function index(ResidentRepository $repo) {
+        $result = $repo->findResident();
+    }
+
 }
